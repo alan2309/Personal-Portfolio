@@ -115,7 +115,7 @@ style={{
                   textShadow: "0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(128, 0, 129, 0.8)",
                   fontFamily: "serif",
                 }}>
-                Arcane Work Experience
+                Arcane Experience
               </h2>
             </div>
             </div>
