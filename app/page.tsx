@@ -266,9 +266,11 @@ export default function Home() {
           !pageRevealedRef.current
         )
           return;
-        e.deltaY > 0
-          ? gotoSection(currentIndexRef.current + 1, 1)
-          : gotoSection(currentIndexRef.current - 1, -1);
+        if (e.deltaY > 0) {
+          gotoSection(currentIndexRef.current + 1, 1);
+        } else {
+          gotoSection(currentIndexRef.current - 1, -1);
+        }
       }
 
       let touchStartY = 0;

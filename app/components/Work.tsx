@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useRef, useState } from "react"
+import {useRef } from "react"
 // import { workExperience } from "@/public/data"
 // import { Briefcase, Calendar, MapPin, Sparkles } from "lucide-react"
 import gsap from "gsap"
@@ -23,48 +23,48 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Work = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  //  const scrollContainerRef = useRef<HTMLDivElement>(null);
     // const [centerCardIndex, setCenterCardIndex] = useState(0);
-  const cardsRef = useRef<Array<HTMLDivElement | null>>([])
+  // const cardsRef = useRef<Array<HTMLDivElement | null>>([])
 
-    useEffect(() => {
-      const handleScroll = () => {
-        if (!scrollContainerRef.current) return;
+    // useEffect(() => {
+    //   const handleScroll = () => {
+    //     if (!scrollContainerRef.current) return;
   
-        const container = scrollContainerRef.current;
-        const containerRect = container.getBoundingClientRect();
-        const containerCenter = containerRect.left + containerRect.width / 2;
+    //     const container = scrollContainerRef.current;
+    //     const containerRect = container.getBoundingClientRect();
+    //     const containerCenter = containerRect.left + containerRect.width / 2;
   
-        let closestIndex = 0;
-        let closestDistance = Number.POSITIVE_INFINITY;
+    //     let closestIndex = 0;
+    //     let closestDistance = Number.POSITIVE_INFINITY;
   
-        cardsRef.current.forEach((card, index) => {
-          if (!card) return;
-          const cardRect = card.getBoundingClientRect();
-          const cardCenter = cardRect.left + cardRect.width / 2;
-          const distance = Math.abs(cardCenter - containerCenter);
+    //     cardsRef.current.forEach((card, index) => {
+    //       if (!card) return;
+    //       const cardRect = card.getBoundingClientRect();
+    //       const cardCenter = cardRect.left + cardRect.width / 2;
+    //       const distance = Math.abs(cardCenter - containerCenter);
   
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestIndex = index;
-          }
-        });
+    //       if (distance < closestDistance) {
+    //         closestDistance = distance;
+    //         closestIndex = index;
+    //       }
+    //     });
   
-        setCenterCardIndex(closestIndex);
-      };
+    //     setCenterCardIndex(closestIndex);
+    //   };
   
-      const scrollContainer = scrollContainerRef.current;
-      if (scrollContainer) {
-        scrollContainer.addEventListener("scroll", handleScroll);
-        handleScroll(); // Initial call
-      }
+    //   const scrollContainer = scrollContainerRef.current;
+    //   if (scrollContainer) {
+    //     scrollContainer.addEventListener("scroll", handleScroll);
+    //     handleScroll(); // Initial call
+    //   }
   
-      return () => {
-        if (scrollContainer) {
-          scrollContainer.removeEventListener("scroll", handleScroll);
-        }
-      };
-    }, []);
+    //   return () => {
+    //     if (scrollContainer) {
+    //       scrollContainer.removeEventListener("scroll", handleScroll);
+    //     }
+    //   };
+    // }, []);
     // const handleMouseEnter = () => {
     //     // Disable main page scroll by adding a class to body
     //     document.body.classList.add("disable-snap-scroll");
