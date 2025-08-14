@@ -360,7 +360,7 @@ export default function Home() {
       </div>
 
       <header>
-        <Navbar onNavigate={gotoSection} activeSection={activeSection} />
+        <Navbar onNavigate={(index) => gotoSection(index, 1)} activeSection={activeSection} />
       </header>
       <section id="first" className="first">
         <Hero />
