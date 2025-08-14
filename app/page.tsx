@@ -232,7 +232,7 @@ export default function Home() {
         "-=0.8"
       );
   }, [gotoSection]);
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     gsap.registerPlugin(SplitText);
 
@@ -306,7 +306,7 @@ export default function Home() {
         document.removeEventListener("touchend", handleTouchEnd);
       };
     });
-  }, [gotoSection, revealHomePage]);
+  }, []);
 
   return (
     <>

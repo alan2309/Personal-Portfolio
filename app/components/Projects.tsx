@@ -14,7 +14,7 @@ import Fireflies from "./Fireflies";
 
 const Projects = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement[]>([]);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [centerCardIndex, setCenterCardIndex] = useState(0);
 
@@ -141,11 +141,11 @@ const Projects = () => {
                   className="flex gap-6 h-full items-center pb-6"
                   style={{ width: "max-content" }}
                 >
-                  {projectsData.map((project, index) => (
+                  {projectsData.map((project: any, index: number) => (
                     <div
                       key={project.id}
                       ref={(el) => {
-                        if (el) cardsRef.current[index] = el;
+                        cardsRef.current[index] = el;
                       }}
                       className={`glass-card group cursor-pointer flex-shrink-0 transition-all duration-300 ${
                         centerCardIndex === index
@@ -160,10 +160,13 @@ const Projects = () => {
                     >
                       <div className="relative overflow-hidden rounded-t-xl">
                         <Image
-                          src={project.image || "/placeholder.svg"}
+                          src={typeof project.image === "string" && project.image.length > 0 ? project.image : "/placeholder.svg"}
                           alt={project.title}
                           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                           loading="lazy"
+                          width={320}
+                          height={192}
+                          unoptimized
                         />
                         <div className="absolute top-4 right-4">
                           <span className="glass-badge">
@@ -182,7 +185,7 @@ const Projects = () => {
                         </p>
 
                         <div className="flex flex-wrap gap-2 mb-4">
-                          {project.tech.map((tech, techIndex) => (
+                          {project.tech.map((tech: string, techIndex: number) => (
                             <span key={techIndex} className="tech-tag">
                               {tech}
                             </span>
