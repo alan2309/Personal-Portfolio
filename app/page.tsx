@@ -232,81 +232,83 @@ export default function Home() {
         "-=0.8"
       );
   }, [gotoSection]);
+
 // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    gsap.registerPlugin(SplitText);
+useEffect(() => {
+  gsap.registerPlugin(SplitText);
 
-    requestAnimationFrame(() => {
-      const sections = Array.from(document.querySelectorAll<HTMLElement>("section"));
-      const images = Array.from(document.querySelectorAll<HTMLDivElement>(".bg"));
-      const headings = gsap.utils.toArray<HTMLElement>(".section-heading");
-      const outerWrappers = gsap.utils.toArray<HTMLDivElement>(".outer");
-      const innerWrappers = gsap.utils.toArray<HTMLDivElement>(".inner");
+  requestAnimationFrame(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("section"));
+    const images = Array.from(document.querySelectorAll<HTMLDivElement>(".bg"));
+    const headings = gsap.utils.toArray<HTMLElement>(".section-heading");
+    const outerWrappers = gsap.utils.toArray<HTMLDivElement>(".outer");
+    const innerWrappers = gsap.utils.toArray<HTMLDivElement>(".inner");
 
-      sectionsRef.current = sections;
-      imagesRef.current = images;
-      outerWrappersRef.current = outerWrappers;
-      innerWrappersRef.current = innerWrappers;
+    sectionsRef.current = sections;
+    imagesRef.current = images;
+    outerWrappersRef.current = outerWrappers;
+    innerWrappersRef.current = innerWrappers;
 
-      splitHeadingsRef.current = headings.map(
-        (heading) =>
-          new SplitText(heading, {
-            type: "chars, words, lines",
-            linesClass: "clip-text",
-          })
-      );
+    splitHeadingsRef.current = headings.map(
+      (heading) =>
+        new SplitText(heading, {
+          type: "chars, words, lines",
+          linesClass: "clip-text",
+        })
+    );
 
-      gsap.set(outerWrappers, { yPercent: 100 });
-      gsap.set(innerWrappers, { yPercent: -100 });
+    gsap.set(outerWrappers, { yPercent: 100 });
+    gsap.set(innerWrappers, { yPercent: -100 });
 
-      function handleWheel(e: WheelEvent) {
-        if (
-          animatingRef.current ||
-          document.body.classList.contains("disable-snap-scroll") ||
-          !pageRevealedRef.current
-        )
-          return;
-        if (e.deltaY > 0) {
-          gotoSection(currentIndexRef.current + 1, 1);
-        } else {
-          gotoSection(currentIndexRef.current - 1, -1);
-        }
+    function handleWheel(e: WheelEvent) {
+      if (
+        animatingRef.current ||
+        document.body.classList.contains("disable-snap-scroll") ||
+        !pageRevealedRef.current
+      )
+        return;
+      if (e.deltaY > 0) {
+        gotoSection(currentIndexRef.current + 1, 1);
+      } else {
+        gotoSection(currentIndexRef.current - 1, -1);
       }
+    }
 
-      let touchStartY = 0;
-      function handleTouchStart(e: TouchEvent) {
-        if (
-          document.body.classList.contains("disable-snap-scroll") ||
-          !pageRevealedRef.current
-        )
-          return;
-        touchStartY = e.changedTouches[0].pageY;
-      }
-      function handleTouchEnd(e: TouchEvent) {
-        if (
-          animatingRef.current ||
-          document.body.classList.contains("disable-snap-scroll") ||
-          !pageRevealedRef.current
-        )
-          return;
-        const dy = e.changedTouches[0].pageY - touchStartY;
-        if (dy > 10) gotoSection(currentIndexRef.current - 1, -1);
-        if (dy < -10) gotoSection(currentIndexRef.current + 1, 1);
-      }
+    let touchStartY = 0;
+    function handleTouchStart(e: TouchEvent) {
+      if (
+        document.body.classList.contains("disable-snap-scroll") ||
+        !pageRevealedRef.current
+      )
+        return;
+      touchStartY = e.changedTouches[0].pageY;
+    }
+    function handleTouchEnd(e: TouchEvent) {
+      if (
+        animatingRef.current ||
+        document.body.classList.contains("disable-snap-scroll") ||
+        !pageRevealedRef.current
+      )
+        return;
+      const dy = e.changedTouches[0].pageY - touchStartY;
+      if (dy > 10) gotoSection(currentIndexRef.current - 1, -1);
+      if (dy < -10) gotoSection(currentIndexRef.current + 1, 1);
+    }
 
-      document.addEventListener("wheel", handleWheel);
-      document.addEventListener("touchstart", handleTouchStart);
-      document.addEventListener("touchend", handleTouchEnd);
+    document.addEventListener("wheel", handleWheel);
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchend", handleTouchEnd);
 
-      revealHomePage();
+    revealHomePage();
 
-      return () => {
-        document.removeEventListener("wheel", handleWheel);
-        document.removeEventListener("touchstart", handleTouchStart);
-        document.removeEventListener("touchend", handleTouchEnd);
-      };
-    });
-  }, []);
+    return () => {
+      document.removeEventListener("wheel", handleWheel);
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+  });
+}, []); // stays empty
+
 
   return (
     <>
