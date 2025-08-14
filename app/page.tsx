@@ -81,7 +81,222 @@ export default function Home() {
     [clamp]
   );
 
-  const revealHomePage = useCallback(() => {
+  // const revealHomePage = useCallback(() => {
+  //   if (pageRevealedRef.current) return;
+
+  //   const tl = gsap.timeline({
+  //     onComplete: () => {
+  //       pageRevealedRef.current = true;
+  //       gotoSection(0, 1);
+  //     },
+  //   });
+
+  //   gsap.set("header", { y: -100, opacity: 0 });
+  //   gsap.set(".hero-content", { y: 100, opacity: 0 });
+  //   gsap.set(".hero-title", { y: 50, opacity: 0 });
+  //   gsap.set(".hero-subtitle", { y: 30, opacity: 0 });
+  //   gsap.set(".hero-cta", { y: 20, opacity: 0 });
+  //   gsap.set("section", { opacity: 0 });
+
+  //   tl.to(".loader-orb", {
+  //     scale: 2,
+  //     opacity: 1,
+  //     duration: 0.6,
+  //     ease: "power2.inOut",
+  //     stagger: 0.05,
+  //   }).to(
+  //     ".loader-orb",
+  //     {
+  //       y: -100,
+  //       scale: 0,
+  //       opacity: 0,
+  //       duration: 0.8,
+  //       ease: "power3.out",
+  //       stagger: 0.03,
+  //     },
+  //     "-=0.2"
+  //   );
+
+  //   tl.to(
+  //     ".progress-fill",
+  //     {
+  //       width: "100%",
+  //       duration: 1.5,
+  //       ease: "power2.inOut",
+  //     },
+  //     0
+  //   );
+
+  //   tl.to(
+  //     ".geo-shape",
+  //     {
+  //       rotation: 720,
+  //       scale: 2,
+  //       opacity: 0,
+  //       duration: 1.2,
+  //       ease: "power2.inOut",
+  //       stagger: 0.1,
+  //     },
+  //     0.3
+  //   );
+
+  //   tl.to(
+  //     ".loader-container .w-32",
+  //     {
+  //       rotation: 360,
+  //       scale: 1.5,
+  //       opacity: 0,
+  //       duration: 1,
+  //       ease: "power2.inOut",
+  //     },
+  //     "-=0.8"
+  //   );
+
+  //   tl.to(
+  //     ".loader-container",
+  //     {
+  //       scale: 0.8,
+  //       opacity: 0,
+  //       duration: 0.8,
+  //       ease: "power3.inOut",
+  //     },
+  //     "-=0.6"
+  //   );
+
+  //   tl.to(
+  //     ".page-overlay",
+  //     {
+  //       clipPath: "circle(0% at 50% 50%)",
+  //       duration: 1,
+  //       ease: "power3.inOut",
+  //     },
+  //     "-=0.4"
+  //   );
+
+  //   tl.to(
+  //     "section",
+  //     {
+  //       opacity: 1,
+  //       duration: 0.1,
+  //     },
+  //     "-=0.2"
+  //   )
+  //     .to(
+  //       "header",
+  //       {
+  //         y: 0,
+  //         opacity: 1,
+  //         duration: 0.7,
+  //         ease: "back.out(1.7)",
+  //       },
+  //       "-=0.6"
+  //     )
+  //     .to(
+  //       ".hero-title",
+  //       {
+  //         y: 0,
+  //         opacity: 1,
+  //         duration: 0.8,
+  //         ease: "power3.out",
+  //       },
+  //       "-=0.5"
+  //     )
+  //     .to(
+  //       ".hero-subtitle",
+  //       {
+  //         y: 0,
+  //         opacity: 1,
+  //         duration: 0.6,
+  //         ease: "power3.out",
+  //       },
+  //       "-=0.6"
+  //     )
+  //     .to(
+  //       ".hero-cta",
+  //       {
+  //         y: 0,
+  //         opacity: 1,
+  //         duration: 0.5,
+  //         ease: "power3.out",
+  //       },
+  //       "-=0.4"
+  //     )
+  //     .to(
+  //       ".hero-content",
+  //       {
+  //         y: 0,
+  //         opacity: 1,
+  //         duration: 1,
+  //         ease: "power3.out",
+  //       },
+  //       "-=0.8"
+  //     );
+  // }, [gotoSection]);
+
+useEffect(() => {
+  gsap.registerPlugin(SplitText);
+
+  const clamp = gsap.utils.clamp(0, 4 - 1);
+
+  const gotoSection = (index: number, direction: number) => {
+    index = clamp(index);
+    if (currentIndexRef.current === index) return;
+
+    animatingRef.current = true;
+    const fromTop = direction === -1;
+    const dFactor = fromTop ? -1 : 1;
+    const tl = gsap.timeline({
+      defaults: { duration: 1.25, ease: "power1.inOut" },
+      onComplete: () => {
+        animatingRef.current = false;
+      },
+    });
+
+    if (currentIndexRef.current >= 0) {
+      gsap.set(sectionsRef.current[currentIndexRef.current], { zIndex: 0 });
+      tl.to(imagesRef.current[currentIndexRef.current], {
+        yPercent: -15 * dFactor,
+      }).set(sectionsRef.current[currentIndexRef.current], {
+        autoAlpha: 0,
+      });
+    }
+
+    gsap.set(sectionsRef.current[index], { autoAlpha: 1, zIndex: 1 });
+    tl.fromTo(
+      [outerWrappersRef.current[index], innerWrappersRef.current[index]],
+      { yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor) },
+      { yPercent: 0 },
+      0
+    ).fromTo(
+      imagesRef.current[index],
+      { yPercent: 15 * dFactor },
+      { yPercent: 0 },
+      0
+    );
+
+    if (
+      splitHeadingsRef.current[index] &&
+      splitHeadingsRef.current[index].chars
+    ) {
+      tl.fromTo(
+        splitHeadingsRef.current[index].chars,
+        { autoAlpha: 0, yPercent: 150 * dFactor },
+        {
+          autoAlpha: 1,
+          yPercent: 0,
+          duration: 1,
+          ease: "power2",
+          stagger: { each: 0.02, from: "random" },
+        },
+        0.2
+      );
+    }
+
+    currentIndexRef.current = index;
+    setActiveSection(index);
+  };
+
+  const revealHomePage = () => {
     if (pageRevealedRef.current) return;
 
     const tl = gsap.timeline({
@@ -231,11 +446,7 @@ export default function Home() {
         },
         "-=0.8"
       );
-  }, [gotoSection]);
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-useEffect(() => {
-  gsap.registerPlugin(SplitText);
+  };
 
   requestAnimationFrame(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("section"));
@@ -307,7 +518,8 @@ useEffect(() => {
       document.removeEventListener("touchend", handleTouchEnd);
     };
   });
-}, []); // stays empty
+}, []); // still runs only once
+
 
 
   return (

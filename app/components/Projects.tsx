@@ -11,6 +11,15 @@ import Staff from "@/components/models/Staff";
 import { projectsData } from "@/public/data";
 import Fireflies from "./Fireflies";
 
+type projectType = {
+  id: string | number;
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+  category: string;
+  tech: string[]; 
+}
 
 const Projects = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -141,7 +150,7 @@ const Projects = () => {
                   className="flex gap-6 h-full items-center pb-6"
                   style={{ width: "max-content" }}
                 >
-                  {projectsData.map((project: any, index: number) => (
+                  {projectsData.map((project: projectType, index: number) => (
                     <div
                       key={project.id}
                       ref={(el) => {
