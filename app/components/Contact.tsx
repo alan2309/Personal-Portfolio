@@ -72,7 +72,7 @@ const Contact = () => {
 
         <div className="flex flex-col items-center justify-center space-y-6 w-full sm:w-3/4">
            <h1 className="section-heading text-yellow-400 font-bold text-center text-5xl md:text-6xl capitalize tracking-wider">
-            summon the demon
+            summon the Messenger
           </h1>
            <p className="text-center font-light text-base md:text-lg text-gray-300 max-w-2xl leading-relaxed">
            Step into the circle, share your tales, and send your message through the ether—await the magic in reply.
