@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
@@ -77,13 +79,20 @@ export default function Navbar({ onNavigate, activeSection = 0 }: NavbarProps) {
 
   const closeSidebar = () => setIsSidebarOpen(false)
 
+  const toggleSidebar = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log("[v0] Mobile nav button clicked, current state:", isSidebarOpen)
+    setIsSidebarOpen(!isSidebarOpen)
+  }
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 h-28 text-sm tracking-widest uppercase font-['Bebas_Neue',sans-serif] transition-all duration-500`}
+        className={`fixed top-0 left-0 right-0 z-[1000] flex items-center justify-between px-5 h-28 text-sm tracking-widest uppercase font-['Bebas_Neue',sans-serif] transition-all duration-500`}
       >
         <div
-          className={`bg-gradient-to-r ${theme.brand} bg-clip-text text-transparent font-bold text-lg transition-all duration-500 ${theme.shadow}`}
+          className={`bg-gradient-to-r ${theme.brand} bg-clip-text text-transparent font-bold text-lg transition-all duration-500`}
         >
           Alankrit Arya
         </div>
@@ -94,11 +103,7 @@ export default function Navbar({ onNavigate, activeSection = 0 }: NavbarProps) {
               key={item.index}
               variant="ghost"
               onClick={() => onNavigate(item.index)}
-              className={`${
-                activeSection === item.index
-                  ? `bg-gradient-to-r ${theme.activeGradient} bg-clip-text text-transparent font-semibold`
-                  : `${theme.text} ${theme.hover}`
-              } ${theme.shadow} transition-all duration-300 relative hover:bg-white/10 backdrop-blur-sm`}
+              className={`${activeSection === item.index ? `bg-gradient-to-r ${theme.activeGradient} bg-clip-text text-transparent font-semibold` : `${theme.text} ${theme.hover}`} ${theme.shadow} transition-all duration-300 relative hover:bg-white/10 backdrop-blur-sm`}
             >
               {item.name}
               {activeSection === item.index && (
@@ -111,13 +116,15 @@ export default function Navbar({ onNavigate, activeSection = 0 }: NavbarProps) {
         </nav>
 
         <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className={`md:hidden flex flex-col gap-1 p-2 ${theme.text} ${theme.hover} ${theme.shadow} transition-colors z-50 relative`}
+          onClick={toggleSidebar}
+          className={`md:hidden flex flex-col gap-1 p-4 ${theme.text} ${theme.hover} ${theme.shadow} transition-colors z-[1100] relative min-w-[48px] min-h-[48px] items-center justify-center bg-black/20 backdrop-blur-sm rounded-lg border border-white/10`}
+          aria-label="Toggle mobile menu"
+          style={{ touchAction: "manipulation" }}
         >
           <div
             className={`w-6 h-0.5 bg-current transition-all duration-300 ${isSidebarOpen ? "rotate-45 translate-y-1.5" : ""}`}
           />
-          <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${isSidebarOpen ? "opacity-0" : ""}`} />
+          <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${isSidebarOpen ? "opacity-100" : ""}`} />
           <div
             className={`w-6 h-0.5 bg-current transition-all duration-300 ${isSidebarOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
           />
@@ -125,27 +132,34 @@ export default function Navbar({ onNavigate, activeSection = 0 }: NavbarProps) {
       </header>
 
       {isSidebarOpen && (
-        <div className="fixed inset-0 z-40 md:hidden" onClick={closeSidebar}>
-          <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
+        <div
+          className="fixed inset-0 z-[1000] md:hidden"
+          onClick={() => {
+            console.log("[v0] Overlay clicked, closing sidebar")
+            closeSidebar()
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
         </div>
       )}
 
       <div
-        className={`fixed inset-0 z-45 transform transition-all duration-300 ease-out ${
-          isSidebarOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-        } md:hidden pointer-events-none ${isSidebarOpen ? "pointer-events-auto" : ""}`}
+        className={`fixed top-0 right-0 bottom-0 z-[1000] transform transition-all duration-300 ease-out ${
+          isSidebarOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-100"
+        } md:hidden w-full pointer-events-none ${isSidebarOpen ? "pointer-events-auto" : ""}`}
       >
         <div
-          className="h-full w-full bg-black/10 backdrop-blur-md border-l border-white/10 shadow-2xl"
+          className="h-full w-full bg-black/90 backdrop-blur-xl border-l border-white/10 shadow-2xl flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-col items-center justify-center h-full px-8">
+          <div className="flex flex-col items-center justify-center flex-1 px-8 py-10">
             <nav className="flex flex-col gap-6 w-full max-w-sm">
               {navItems.map((item) => (
                 <Button
                   key={item.index}
                   variant="ghost"
                   onClick={() => {
+                    console.log("[v0] Nav item clicked:", item.name)
                     onNavigate(item.index)
                     closeSidebar()
                   }}

@@ -61,9 +61,9 @@ const Hero = () => {
   }, [])
 
   return (
-    <div className="outer">
-      <div className="inner">
-        <div className="bg relative overflow-hidden">
+    <div className="outer min-h-screen flex flex-col">
+      <div className="inner flex-1 flex flex-col">
+        <div className="bg relative overflow-hidden min-h-screen">
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
@@ -72,18 +72,19 @@ const Hero = () => {
               filter: "brightness(0.6) contrast(1.1)",
             }}
           />
- <Fireflies />
+          <Fireflies />
           <div className="absolute inset-0 bg-gradient-to-b from-grey-900/40 via-grey-900/30 to-grey-900/50" />
 
-          <div className="absolute inset-0 flex items-center justify-center p-8 z-20">
-            <div className="text-center max-w-4xl">
+          <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8 z-20">
+            <div className="text-center max-w-full sm:max-w-4xl w-full">
               <h1
                 ref={titleRef}
-                className="section-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-6"
+                className="section-heading text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-4 sm:mb-6"
                 style={{
                   color: "#d1fae5",
                   textShadow: "0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(16, 185, 129, 0.4)",
                   fontFamily: "serif",
+                  wordBreak: "break-word",
                 }}
               >
                 Alankrit Arya
@@ -91,11 +92,12 @@ const Hero = () => {
 
               <p
                 ref={subtitleRef}
-                className="text-xl md:text-2xl lg:text-3xl mb-8 font-medium"
+                className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl mb-6 sm:mb-8 font-medium"
                 style={{
                   color: "#d1fae5",
                   textShadow: "0 0 30px rgba(167, 243, 208, 0.8), 0 2px 4px rgba(0, 0, 0, 0.6)",
                   filter: "drop-shadow(0 0 15px rgba(167, 243, 208, 0.5))",
+                  wordBreak: "break-word",
                 }}
               >
                 Weaving Digital Magic Through Code
@@ -103,9 +105,10 @@ const Hero = () => {
 
               <p
                 ref={descriptionRef}
-                className="text-base md:text-lg text-teal-100 max-w-2xl mx-auto leading-relaxed backdrop-blur-sm bg-emerald-900/30 p-6 rounded-2xl border border-emerald-400/40 mb-8"
+                className="text-xs xs:text-sm sm:text-base md:text-lg text-teal-100 max-w-full sm:max-w-2xl mx-auto leading-relaxed backdrop-blur-sm bg-emerald-900/30 p-3 xs:p-4 sm:p-6 rounded-2xl border border-emerald-400/40 mb-6 sm:mb-8"
                 style={{
                   textShadow: "0 0 10px rgba(204, 251, 241, 0.3)",
+                  wordBreak: "break-word",
                 }}
               >
                 I craft immersive web experiences that blend cutting-edge technology with enchanting design.
@@ -113,15 +116,18 @@ const Hero = () => {
                 precision and magical user interactions.
               </p>
 
-              <div ref={socialLinksRef} className="flex flex-wrap justify-center gap-4 md:gap-6">
+              <div
+                ref={socialLinksRef}
+                className="flex flex-wrap justify-center gap-2 xs:gap-3 sm:gap-4 md:gap-6"
+              >
                 <a
                   href="https://linkedin.com/in/alankrit-arya"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 px-4 py-2 bg-teal-600/25 hover:bg-teal-600/45 backdrop-blur-sm border border-teal-400/40 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-teal-400/25"
+                  className="group flex items-center gap-2 px-3 xs:px-4 py-2 bg-teal-600/25 hover:bg-teal-600/45 backdrop-blur-sm border border-teal-400/40 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-teal-400/25 text-xs xs:text-sm sm:text-base"
                 >
                   <svg
-                    className="w-5 h-5 text-teal-200 group-hover:text-teal-100"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-teal-200 group-hover:text-teal-100"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -132,10 +138,10 @@ const Hero = () => {
 
                 <a
                   href="mailto:alankrit.arya@gmail.com"
-                  className="group flex items-center gap-2 px-4 py-2 bg-emerald-600/25 hover:bg-emerald-600/45 backdrop-blur-sm border border-emerald-400/40 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-emerald-400/25"
+                  className="group flex items-center gap-2 px-3 xs:px-4 py-2 bg-emerald-600/25 hover:bg-emerald-600/45 backdrop-blur-sm border border-emerald-400/40 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-emerald-400/25 text-xs xs:text-sm sm:text-base"
                 >
                   <svg
-                    className="w-5 h-5 text-emerald-200 group-hover:text-emerald-100"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-200 group-hover:text-emerald-100"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -146,10 +152,10 @@ const Hero = () => {
 
                 <a
                   href="tel:+1234567890"
-                  className="group flex items-center gap-2 px-4 py-2 bg-green-600/25 hover:bg-green-600/45 backdrop-blur-sm border border-green-400/40 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-400/25"
+                  className="group flex items-center gap-2 px-3 xs:px-4 py-2 bg-green-600/25 hover:bg-green-600/45 backdrop-blur-sm border border-green-400/40 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-400/25 text-xs xs:text-sm sm:text-base"
                 >
                   <svg
-                    className="w-5 h-5 text-green-200 group-hover:text-green-100"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-green-200 group-hover:text-green-100"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -161,10 +167,10 @@ const Hero = () => {
                 <a
                   href="/resume.pdf"
                   download
-                  className="group flex items-center gap-2 px-4 py-2 bg-cyan-600/25 hover:bg-cyan-600/45 backdrop-blur-sm border border-cyan-400/40 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/25"
+                  className="group flex items-center gap-2 px-3 xs:px-4 py-2 bg-cyan-600/25 hover:bg-cyan-600/45 backdrop-blur-sm border border-cyan-400/40 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/25 text-xs xs:text-sm sm:text-base"
                 >
                   <svg
-                    className="w-5 h-5 text-cyan-200 group-hover:text-cyan-100"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-200 group-hover:text-cyan-100"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -178,23 +184,23 @@ const Hero = () => {
 
           <div
             ref={scrollIndicatorRef}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-emerald-100 z-30"
+            className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-emerald-100 z-30"
           >
-            <div className="text-sm mb-2 font-medium tracking-wider opacity-80">SCROLL TO EXPLORE</div>
-            <div className="w-6 h-10 border-2 border-emerald-300/60 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-gradient-to-b from-emerald-300 to-teal-300 rounded-full mt-2 animate-pulse"></div>
+            <div className="text-xs sm:text-sm mb-1 sm:mb-2 font-medium tracking-wider opacity-80">SCROLL TO EXPLORE</div>
+            <div className="w-5 sm:w-6 h-8 sm:h-10 border-2 border-emerald-300/60 rounded-full flex justify-center">
+              <div className="w-0.5 sm:w-1 h-2 sm:h-3 bg-gradient-to-b from-emerald-300 to-teal-300 rounded-full mt-2 animate-pulse"></div>
             </div>
-            <div className="mt-2 text-emerald-300/70">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <div className="mt-1 sm:mt-2 text-emerald-300/70">
+              <svg width="16" height="16" className="sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
               </svg>
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-96 h-32 bg-gradient-to-t from-emerald-600/25 to-transparent blur-3xl" />
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-teal-500/15 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 sm:w-96 h-16 sm:h-32 bg-gradient-to-t from-emerald-600/25 to-transparent blur-3xl" />
+          <div className="absolute top-1/4 left-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-teal-500/15 rounded-full blur-3xl animate-pulse" />
           <div
-            className="absolute top-1/3 right-1/4 w-48 h-48 bg-green-400/15 rounded-full blur-3xl animate-pulse"
+            className="absolute top-1/3 right-1/4 w-24 sm:w-48 h-24 sm:h-48 bg-green-400/15 rounded-full blur-3xl animate-pulse"
             style={{ animationDelay: "1s" }}
           />
         </div>
