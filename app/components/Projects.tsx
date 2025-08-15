@@ -171,7 +171,7 @@ const Projects = () => {
                         <Image
                           src={typeof project.image === "string" && project.image.length > 0 ? project.image : "/placeholder.svg"}
                           alt={project.title}
-                          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="w-full h-25 object-cover transition-transform duration-300 group-hover:scale-105"
                           loading="lazy"
                           width={320}
                           height={192}
