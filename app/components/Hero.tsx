@@ -112,8 +112,8 @@ const Hero = () => {
                 }}
               >
                 I craft immersive web experiences that blend cutting-edge technology with enchanting design.
-                Specializing in React, Next.js, and GSAP animations, I bring digital realms to life with pixel-perfect
-                precision and magical user interactions.
+               My goal is to bring ideas to life with smooth interactions and thoughtful design.
+               I&apos;m a software developer who loves crafting digital experiences that feel engaging, smooth, and full of life.
               </p>
 
               <div
