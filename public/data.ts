@@ -105,7 +105,7 @@ export const workExperience = [
     location: "Mumbai, IN",
     description:
       "Led development of scalable web applications using React, Node.js, and cloud technologies. Mentored junior developers and architected microservices.",
-    daysWorked: 302,
+    daysWorked: 300,
     startDate: "Aug 2022",
     endDate: "May 2023",
   },
@@ -149,7 +149,7 @@ export const workExperience = [
     location: "Mumbai, IN",
     description:
       "I created a Virtual Chemistry Lab that allows students to perform their laboratory work through a digitally installed software application, making experiments more accessible and interactive.",
-    daysWorked: 303,
+    daysWorked: 300,
     startDate: "Jul 2020",
     endDate: "Apr 2021",
   },
