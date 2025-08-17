@@ -104,7 +104,7 @@ export const workExperience = [
     company: "Tata Advanced Systems Limited",
     location: "Mumbai, IN",
     description:
-      "Led development of scalable web applications using React, Node.js, and cloud technologies. Mentored junior developers and architected microservices.",
+      "Developed and configured EasyIO device controllers to manage controlled environments through the C3 (Central Command & Control) system.",
     daysWorked: 300,
     startDate: "Aug 2022",
     endDate: "May 2023",
