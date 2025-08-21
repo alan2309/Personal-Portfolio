@@ -117,14 +117,16 @@ export default function Navbar({ onNavigate, activeSection = 0 }: NavbarProps) {
 
         <button
           onClick={toggleSidebar}
-          className={`md:hidden flex flex-col gap-1 p-4 ${theme.text} ${theme.hover} ${theme.shadow} transition-colors z-[1100] relative min-w-[48px] min-h-[48px] items-center justify-center bg-black/20 backdrop-blur-sm rounded-lg border border-white/10`}
+          className={`md:hidden flex flex-col gap-1 p-4 ${theme.text} ${theme.hover} ${theme.shadow} transition-colors z-[1100] relative min-w-[48px] min-h-[48px] items-center justify-center bg-black/20 backdrop-blur-sm rounded-lg border border-white/10 cursor-pointer`}
           aria-label="Toggle mobile menu"
-          style={{ touchAction: "manipulation" }}
+          type="button"
         >
           <div
             className={`w-6 h-0.5 bg-current transition-all duration-300 ${isSidebarOpen ? "rotate-45 translate-y-1.5" : ""}`}
           />
-          <div className={`w-6 h-0.5 bg-current transition-all duration-300 ${isSidebarOpen ? "opacity-100" : ""}`} />
+          <div
+            className={`w-6 h-0.5 bg-current transition-all duration-300 ${isSidebarOpen ? "opacity-0" : "opacity-100"}`}
+          />
           <div
             className={`w-6 h-0.5 bg-current transition-all duration-300 ${isSidebarOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
           />
@@ -133,7 +135,7 @@ export default function Navbar({ onNavigate, activeSection = 0 }: NavbarProps) {
 
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-[1000] md:hidden"
+          className="fixed inset-0 z-[1050] md:hidden"
           onClick={() => {
             console.log("[v0] Overlay clicked, closing sidebar")
             closeSidebar()
@@ -144,9 +146,9 @@ export default function Navbar({ onNavigate, activeSection = 0 }: NavbarProps) {
       )}
 
       <div
-        className={`fixed top-0 right-0 bottom-0 z-[1000] transform transition-all duration-300 ease-out ${
-          isSidebarOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-100"
-        } md:hidden w-full pointer-events-none ${isSidebarOpen ? "pointer-events-auto" : ""}`}
+        className={`fixed top-0 right-0 bottom-0 z-[1060] transform transition-all duration-300 ease-out ${
+          isSidebarOpen ? "translate-x-0" : "translate-x-full"
+        } md:hidden w-full`}
       >
         <div
           className="h-full w-full bg-black/90 backdrop-blur-xl border-l border-white/10 shadow-2xl flex flex-col"
